@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MazeXMxtreme - Afro EDM duo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600&display=swap');
+    
+    :root {
+      --neon-pink: #ff00ff;
+      --neon-blue: #00ffff;
+      --neon-purple: #9d00ff;
+      --dark-bg: #0a0a0f;
+    }
+    
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background-color: var(--dark-bg);
+      color: white;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+    }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, var(--neon-purple) 0%, var(--dark-bg) 30%, var(--dark-bg) 70%, var(--neon-blue) 100%);
+    }
+    
+    .neon-text {
+      text-shadow: 0 0 10px var(--neon-pink), 
+                   0 0 20px var(--neon-pink), 
+                   0 0 30px var(--neon-purple);
+    }
+    
+    .neon-border {
+      border: 2px solid var(--neon-pink);
+      box-shadow: 0 0 15px var(--neon-pink),
+                  inset 0 0 15px rgba(255, 0, 255, 0.1);
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 0, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0); }
+    }
+    
+    .glitch {
+      position: relative;
+    }
+    
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .glitch::before {
+      left: 2px;
+      text-shadow: -1px 0 var(--neon-blue);
+      animation: glitch-1 2s infinite linear alternate-reverse;
+    }
+    
+    .glitch::after {
+      left: -2px;
+      text-shadow: 1px 0 var(--neon-purple);
+      animation: glitch-2 3s infinite linear alternate-reverse;
+    }
+    
+    @keyframes glitch-1 {
+      0% { clip: rect(20px, 9999px, 25px, 0); }
+      5% { clip: rect(15px, 9999px, 40px, 0); }
+      10% { clip: rect(35px, 9999px, 50px, 0); }
+      15% { clip: rect(45px, 9999px, 60px, 0); }
+      20% { clip: rect(60px, 9999px, 75px, 0); }
+      100% { clip: rect(80px, 9999px, 100px, 0); }
+    }
+    
+    @keyframes glitch-2 {
+      0% { clip: rect(60px, 9999px, 70px, 0); }
+      5% { clip: rect(30px, 9999px, 45px, 0); }
+      10% { clip: rect(50px, 9999px, 65px, 0); }
+      15% { clip: rect(25px, 9999px, 40px, 0); }
+      20% { clip: rect(70px, 9999px, 85px, 0); }
+      100% { clip: rect(90px, 9999px, 110px, 0); }
+    }
+    
+    .dj-deck {
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dj-deck::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,0,255,0.1) 50%, transparent 70%);
+      animation: rotate 4s linear infinite;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .vinyl {
+      animation: spin 20s linear infinite;
+      transition: transform 0.3s ease;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .vinyl:hover {
+      animation-play-state: paused;
+    }
+    
+    .equalizer-bar {
+      width: 4px;
+      margin: 0 2px;
+      background: linear-gradient(to top, var(--neon-pink), var(--neon-blue));
+      border-radius: 2px;
+      animation: equalize 1.5s infinite ease-in-out;
+    }
+    
+    .equalizer-bar:nth-child(2) { animation-delay: 0.1s; }
+    .equalizer-bar:nth-child(3) { animation-delay: 0.2s; }
+    .equalizer-bar:nth-child(4) { animation-delay: 0.3s; }
+    .equalizer-bar:nth-child(5) { animation-delay: 0.4s; }
+    .equalizer-bar:nth-child(6) { animation-delay: 0.5s; }
+    
+    @keyframes equalize {
+      0%, 100% { height: 20px; }
+      50% { height: 40px; }
+    }
+    
+    .event-card {
+      background: rgba(10, 10, 15, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 0, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .event-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--neon-pink);
+      box-shadow: 0 10px 30px rgba(255, 0, 255, 0.2);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .mobile-stack {
+        flex-direction: column;
+      }
+      .dj-deck::before {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body class="relative">
+  <!-- Animated background elements -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-radial from-purple-900/20 to-transparent blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-radial from-blue-900/20 to-transparent blur-3xl"></div>
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="relative z-40 py-6 px-6 lg:px-12 flex justify-between items-center border-b border-white/10">
+    <div class="flex items-center space-x-4">
+      <!-- <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#ff00ff] to-[#00ffff] flex items-center justify-center font-bold text-2xl">
+        BW
+      </div> -->
+      <h1 class="text-2xl font-heading font-bold">
+        <span class="gradient-text">Maze</span> <span class="text-white">x</span> <span class="gradient-text">Mxtreme</span> 
+      </h1>
+    </div>
+    
+    <div class="hidden md:flex items-center space-x-8">
+      <a href="#home" class="hover:text-[#ff00ff] transition font-medium">Home</a>
+      <a href="#about" class="hover:text-[#00ffff] transition font-medium">About</a>
+      <a href="#shows" class="hover:text-[#ff00ff] transition font-medium">Shows</a>
+      <a href="#music" class="hover:text-[#00ffff] transition font-medium">Music</a>
+      <a href="#contact" class="hover:text-[#ff00ff] transition font-medium">Contact</a>
+    </div>
+    
+    <div class="flex items-center space-x-4">
+      <div class="hidden md:flex items-center space-x-2">
+        <div class="equalizer-bar"></div>
+        <div class="equalizer-bar"></div>
+        <div class="equalizer-bar"></div>
+        <div class="equalizer-bar"></div>
+        <div class="equalizer-bar"></div>
+      </div>
+      <button class="px-6 py-2 neon-border rounded-lg font-bold hover:bg-[#ff00ff] hover:text-black transition pulse">
+        BOOK NOW
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative py-12 md:py-24 px-6 hero-gradient overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Hero Content -->
+        <div class="text-center lg:text-left">
+          <div class="inline-flex items-center space-x-3 mb-6">
+            <span class="w-3 h-3 rounded-full bg-[#ff00ff] animate-pulse"></span>
+            <span class="text-lg font-semibold">AFRO EDM DUO</span>
+            <span class="w-3 h-3 rounded-full bg-[#00ffff] animate-pulse"></span>
+          </div>
+          
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading mb-6">
+            <span class="block glitch" data-text="----------------">AFRICA'S</span>
+            <span class="block neon-text mt-2">FIRST</span>
+            <span class="block gradient-text mt-2">EDM DUO</span>
+          </h1>
+          
+          <p class="text-xl text-gray-300 mb-8 max-w-2xl">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-6 mb-8">
+            <button class="px-8 py-4 bg-gradient-to-r from-[#ff00ff] to-[#9d00ff] rounded-xl font-bold text-lg hover:opacity-90 transition transform hover:scale-105">
+              <i class="fas fa-calendar-check mr-3"></i>UPCOMING SHOWS
+            </button>
+            <button class="px-8 py-4 border-2 border-[#00ffff] text-[#00ffff] rounded-xl font-bold text-lg hover:bg-[#00ffff] hover:text-black transition">
+              <i class="fas fa-music mr-3"></i>LISTEN NOW
+            </button>
+          </div>
+          
+          <div class="flex items-center justify-center lg:justify-start space-x-8 text-gray-400">
+            <div class="text-center">
+              <div class="text-3xl font-bold gradient-text">500+</div>
+              <div class="text-sm">EVENTS</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold gradient-text">40+</div>
+              <div class="text-sm">COUNTRIES</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold gradient-text">1M+</div>
+              <div class="text-sm">FANS</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- DJ Visual -->
+        <div class="relative flex justify-center">
+          <div class="dj-deck w-full max-w-lg p-8">
+            <div class="relative z-10">
+              <!-- Vinyl Records -->
+              <div class="flex justify-center items-center space-x-8 mb-8">
+                <div class="relative">
+                  <div class="w-40 h-40 rounded-full bg-gradient-conic from-gray-900 via-gray-800 to-gray-900 vinyl">
+                    <div class="absolute inset-4 rounded-full bg-black flex items-center justify-center">
+                      <div class="w-8 h-8 rounded-full bg-white"></div>
+                    </div>
+                  </div>
+                  <div class="absolute -top-2 -right-2 w-12 h-12 bg-gradient-to-br from-[#ff00ff] to-[#9d00ff] rounded-full flex items-center justify-center">
+                    <i class="fas fa-play text-white"></i>
+                  </div>
+                  <p class="text-center mt-4 font-bold">Gbedu</p>
+                </div>
+                
+                <div class="relative">
+                  <div class="w-40 h-40 rounded-full bg-gradient-conic from-gray-900 via-gray-800 to-gray-900 vinyl" style="animation-direction: reverse;">
+                    <div class="absolute inset-4 rounded-full bg-black flex items-center justify-center">
+                      <div class="w-8 h-8 rounded-full bg-white"></div>
+                    </div>
+                  </div>
+                  <div class="absolute -top-2 -left-2 w-12 h-12 bg-gradient-to-br from-[#00ffff] to-[#0099ff] rounded-full flex items-center justify-center">
+                    <i class="fas fa-play text-white"></i>
+                  </div>
+                  <p class="text-center mt-4 font-bold">On repeat</p>
+                </div>
+              </div>
+              
+              <!-- Mixer -->
+              <div class="bg-gray-900 rounded-2xl p-6">
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                  <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-b from-[#ff00ff] to-black mx-auto mb-2 flex items-center justify-center">
+                      <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <p class="text-xs">BASS</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-b from-[#00ffff] to-black mx-auto mb-2 flex items-center justify-center">
+                      <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <p class="text-xs">TREBLE</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-b from-[#9d00ff] to-black mx-auto mb-2 flex items-center justify-center">
+                      <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <p class="text-xs">EFFECTS</p>
+                  </div>
+                </div>
+                
+                <div class="flex justify-center space-x-4">
+                  <div class="equalizer-bar"></div>
+                  <div class="equalizer-bar"></div>
+                  <div class="equalizer-bar"></div>
+                  <div class="equalizer-bar"></div>
+                  <div class="equalizer-bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading mb-6">
+          THE <span class="gradient-text">DUO</span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Two artists, one vision. Combining technical mastery with creative innovation to push the boundaries of electronic music.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+        <!-- Alex -->
+        <div class="event-card rounded-3xl p-8">
+          <div class="flex items-center mb-6">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-[#ff00ff] to-[#9d00ff] flex items-center justify-center text-3xl font-bold mr-6">
+              M
+            </div>
+            <div>
+              <h3 class="text-3xl font-heading font-bold">Maze</h3>
+              <p class="text-[#ff00ff] font-semibold">[POSITION]</p>
+            </div>
+          </div>
+          <p class="text-gray-300 mb-6">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-[#ff00ff]/10 text-[#ff00ff] rounded-full text-sm">SOUND DESIGN</span>
+            <span class="px-4 py-2 bg-[#ff00ff]/10 text-[#ff00ff] rounded-full text-sm">LIVE MIXING</span>
+            <span class="px-4 py-2 bg-[#ff00ff]/10 text-[#ff00ff] rounded-full text-sm">TECH HOUSE</span>
+          </div>
+        </div>
+        
+        <!-- Riley -->
+        <div class="event-card rounded-3xl p-8">
+          <div class="flex items-center mb-6">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-[#00ffff] to-[#0099ff] flex items-center justify-center text-3xl font-bold mr-6">
+              M
+            </div>
+            <div>
+              <h3 class="text-3xl font-heading font-bold">Mxtreme</h3>
+              <p class="text-[#00ffff] font-semibold">[POSITION]</p>
+            </div>
+          </div>
+          <p class="text-gray-300 mb-6">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-[#00ffff]/10 text-[#00ffff] rounded-full text-sm">MELODIC TECH</span>
+            <span class="px-4 py-2 bg-[#00ffff]/10 text-[#00ffff] rounded-full text-sm">VISUAL DESIGN</span>
+            <span class="px-4 py-2 bg-[#00ffff]/10 text-[#00ffff] rounded-full text-sm">PROGRESSIVE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Shows -->
+  <section id="shows" class="py-20 px-6 bg-black/30">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading mb-6">
+          UPCOMING <span class="gradient-text">SHOWS</span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Experience BeatWave live. Check out our upcoming performances and secure your tickets.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Show 1 -->
+        <div class="event-card rounded-2xl overflow-hidden">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Festival" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+            <div class="absolute top-4 right-4 bg-gradient-to-r from-[#ff00ff] to-[#9d00ff] text-white px-4 py-1 rounded-full text-sm font-bold">
+              SOLD OUT
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">ELECTRIC DREAMS FESTIVAL</h3>
+            <p class="text-gray-400 mb-4">Main Stage Performance</p>
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex items-center text-gray-300">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                <span>JUN 15, 2024</span>
+              </div>
+              <div class="flex items-center text-gray-300">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                <span>MIAMI</span>
+              </div>
+            </div>
+            <button class="w-full py-3 bg-gradient-to-r from-[#ff00ff] to-[#9d00ff] rounded-lg font-bold hover:opacity-90 transition">
+              JOIN WAITLIST
+            </button>
+          </div>
+        </div>
+        
+        <!-- Show 2 -->
+        <div class="event-card rounded-2xl overflow-hidden">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Club" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+            <div class="absolute top-4 right-4 bg-gradient-to-r from-[#00ffff] to-[#0099ff] text-black px-4 py-1 rounded-full text-sm font-bold">
+              TICKETS AVAILABLE
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">NEON NIGHTS CLUB RESIDENCY</h3>
+            <p class="text-gray-400 mb-4">Exclusive 4-Hour Set</p>
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex items-center text-gray-300">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                <span>JUN 22, 2024</span>
+              </div>
+              <div class="flex items-center text-gray-300">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                <span>LAS VEGAS</span>
+              </div>
+            </div>
+            <button class="w-full py-3 neon-border rounded-lg font-bold hover:bg-[#ff00ff] hover:text-black transition">
+              GET TICKETS
+            </button>
+          </div>
+        </div>
+        
+        <!-- Show 3 -->
+        <div class="event-card rounded-2xl overflow-hidden">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Concert" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+            <div class="absolute top-4 right-4 bg-gradient-to-r from-[#ff00ff] to-[#00ffff] text-white px-4 py-1 rounded-full text-sm font-bold">
+              20% LEFT
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">MAZEXMXTREME WORLD TOUR</h3>
+            <p class="text-gray-400 mb-4">London Premiere</p>
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex items-center text-gray-300">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                <span>JUL 5, 2024</span>
+              </div>
+              <div class="flex items-center text-gray-300">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                <span>LONDON</span>
+              </div>
+            </div>
+            <button class="w-full py-3 bg-gradient-to-r from-[#00ffff] to-[#0099ff] text-black rounded-lg font-bold hover:opacity-90 transition">
+              BOOK NOW
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <button class="px-8 py-4 border-2 border-white/30 hover:border-[#ff00ff] rounded-xl font-bold text-lg hover:text-[#ff00ff] transition">
+          VIEW ALL TOUR DATES <i class="fas fa-arrow-right ml-2"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Music Section -->
+  <section id="music" class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading mb-6">
+          LATEST <span class="gradient-text">RELEASES</span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Stream our latest tracks and remixes across all platforms
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Track 1 -->
+        <div class="event-card rounded-2xl p-6">
+          <div class="flex items-center mb-6">
+            <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-[#ff00ff] to-[#9d00ff] flex items-center justify-center mr-4">
+              <i class="fas fa-play text-white text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold">NEON DREAMS</h3>
+              <p class="text-gray-400">Original Mix • 2024</p>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="flex space-x-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff00ff] transition">
+                <i class="fab fa-spotify"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00ffff] transition">
+                <i class="fab fa-soundcloud"></i>
+              </a>
+            </div>
+            <span class="text-gray-400">4:32</span>
+          </div>
+        </div>
+        
+        <!-- Track 2 -->
+        <div class="event-card rounded-2xl p-6">
+          <div class="flex items-center mb-6">
+            <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-[#00ffff] to-[#0099ff] flex items-center justify-center mr-4">
+              <i class="fas fa-play text-white text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold">CYBER LOVE</h3>
+              <p class="text-gray-400">VIP Remix • 2024</p>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="flex space-x-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff00ff] transition">
+                <i class="fab fa-spotify"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00ffff] transition">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+            <span class="text-gray-400">5:18</span>
+          </div>
+        </div>
+        
+        <!-- Track 3 -->
+        <div class="event-card rounded-2xl p-6">
+          <div class="flex items-center mb-6">
+            <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-[#ff00ff] to-[#00ffff] flex items-center justify-center mr-4">
+              <i class="fas fa-play text-white text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold">DIGITAL HEARTBEAT</h3>
+              <p class="text-gray-400">Live Version • 2023</p>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="flex space-x-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff00ff] transition">
+                <i class="fab fa-apple"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00ffff] transition">
+                <i class="fab fa-bandcamp"></i>
+              </a>
+            </div>
+            <span class="text-gray-400">6:45</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-20 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="event-card rounded-3xl p-8 lg:p-12 text-center">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading mb-6">
+          BOOK <span class="gradient-text">MAZEXMXTREME</span>
+        </h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Ready to electrify your event? Contact us for bookings, collaborations, and custom performances.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <button class="px-8 py-4 bg-gradient-to-r from-[#ff00ff] to-[#9d00ff] rounded-xl font-bold text-lg hover:opacity-90 transition transform hover:scale-105">
+            <i class="fas fa-envelope mr-3"></i>BOOKING INQUIRY
+          </button>
+          <button class="px-8 py-4 border-2 border-[#00ffff] text-[#00ffff] rounded-xl font-bold text-lg hover:bg-[#00ffff] hover:text-black transition">
+            <i class="fas fa-headphones mr-3"></i>LISTEN TO DEMO
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Footer -->
+<footer class="border-t border-white/10 py-12 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <!-- Brand Section -->
+      <div>
+        <div class="flex items-center space-x-4 mb-6">
+          <h3 class="text-2xl font-heading font-bold">
+            <span class="gradient-text">MAZEXMXTREME</span>
+          </h3>
+        </div>
+        <p class="text-gray-400 mb-6">
+          Creating unforgettable electronic music experiences through innovation and passion.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff00ff] transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00ffff] transition">
+            <i class="fab fa-soundcloud"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff00ff] transition">
+            <i class="fab fa-spotify"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00ffff] transition">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-bold text-lg mb-6">QUICK LINKS</h4>
+        <ul class="space-y-3 text-gray-400">
+          <li><a href="#home" class="hover:text-[#ff00ff] transition">Home</a></li>
+          <li><a href="#about" class="hover:text-[#00ffff] transition">About</a></li>
+          <li><a href="#shows" class="hover:text-[#ff00ff] transition">Shows</a></li>
+          <li><a href="#music" class="hover:text-[#00ffff] transition">Music</a></li>
+          <li><a href="#contact" class="hover:text-[#ff00ff] transition">Contact</a></li>
+        </ul>
+      </div>
+      
+      <!-- Contact Information -->
+      <div>
+        <h4 class="font-bold text-lg mb-6">CONTACT</h4>
+        <ul class="space-y-4 text-gray-400">
+          <li class="flex items-start">
+            <i class="fas fa-map-marker-alt mr-3 mt-1 text-[#ff00ff]"></i>
+            <div>
+              <p class="font-medium text-white">Booking & Management:</p>
+              <p>123 Music Avenue</p>
+              <p>Johannesburg 2001</p>
+              <p>South Africa</p>
+            </div>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-envelope mr-3 text-[#00ffff]"></i>
+            <a href="mailto:booking@mazexmxtreme.com" class="hover:text-[#00ffff] transition">
+              booking@mazexmxtreme.com
+            </a>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-phone mr-3 text-[#ff00ff]"></i>
+            <a href="tel:+27111234567" class="hover:text-[#ff00ff] transition">
+              +27 11 123 4567
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter Section -->
+      <div>
+        <h4 class="font-bold text-lg mb-6">NEWSLETTER</h4>
+        <p class="text-gray-400 mb-4">
+          Subscribe to get exclusive updates, early access to tickets, and behind-the-scenes content.
+        </p>
+        <form id="newsletter-form" class="space-y-3">
+          <div>
+            <input 
+              type="email" 
+              placeholder="Your email address" 
+              required
+              class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#ff00ff] focus:ring-1 focus:ring-[#ff00ff] transition"
+            >
+          </div>
+          <div>
+            <input 
+              type="text" 
+              placeholder="Your name (optional)" 
+              class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#00ffff] focus:ring-1 focus:ring-[#00ffff] transition"
+            >
+          </div>
+          <div class="flex items-center mb-4">
+            <input 
+              type="checkbox" 
+              id="privacy-policy" 
+              required
+              class="w-4 h-4 mr-2 bg-white/5 border-white/10 rounded focus:ring-[#ff00ff]"
+            >
+            <label for="privacy-policy" class="text-sm text-gray-400">
+              I agree to receive updates and promotional emails
+            </label>
+          </div>
+          <button 
+            type="submit"
+            class="w-full py-3 bg-gradient-to-r from-[#ff00ff] to-[#9d00ff] rounded-lg font-bold hover:opacity-90 transition transform hover:scale-[1.02]"
+          >
+            <i class="fas fa-paper-plane mr-2"></i>SUBSCRIBE NOW
+          </button>
+        </form>
+        <p id="newsletter-message" class="mt-3 text-sm text-gray-400 hidden"></p>
+      </div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="pt-8 border-t border-white/10 text-center text-gray-500 text-sm">
+      <p>&copy; 2024 MazeXMxtreme. All rights reserved. | Designed with <i class="fas fa-heart text-[#ff00ff]"></i> for the music community</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Newsletter Success Modal -->
+<div id="success-modal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+  <div class="bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 border border-[#ff00ff]/30">
+    <div class="text-center">
+      <div class="w-20 h-20 rounded-full bg-gradient-to-r from-[#ff00ff] to-[#00ffff] flex items-center justify-center mx-auto mb-6">
+        <i class="fas fa-check text-3xl text-black"></i>
+      </div>
+      <h3 class="text-2xl font-bold mb-4">Successfully Subscribed!</h3>
+      <p class="text-gray-300 mb-6">
+        Thank you for joining the MazeXMxtreme newsletter. You'll receive our next update soon!
+      </p>
+      <button 
+        onclick="document.getElementById('success-modal').classList.add('hidden')"
+        class="px-6 py-3 border border-[#00ffff] text-[#00ffff] rounded-lg hover:bg-[#00ffff] hover:text-black transition"
+      >
+        CLOSE
+      </button>
+    </div>
+  </div>
+</div>
